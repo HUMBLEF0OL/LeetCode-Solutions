@@ -9,46 +9,36 @@
  * }
  */
 class Solution {
-    public static int findLength(ListNode head){
-        if(head == null)return 0;
-        return 1+findLength(head.next);
-    }
-    public static int findTwinValue(ListNode head, int twinIndex){
-        ListNode temp = head;
-        int i=0;
-        while(temp!=null){
-            if(i == twinIndex)return temp.val;
-            temp = temp.next;
-            i++;
-        }
-        return 0;
+    public ListNode reverseList(ListNode head){
+        if(head.next == null || head == null)return head;
+        
+        ListNode newHead = reverseList(head.next);
+        ListNode temp = head.next;
+        temp.next = head;
+        head.next = null;
+        return newHead;
     }
     public int pairSum(ListNode head) {
-        int result = Integer.MIN_VALUE;
-        ListNode temp = head;
-        /* find the length of the list */
-        int length = findLength(head);
-        int i =0;
-        int arr[] = new int[length];
-        while(temp!=null){
-            arr[i++] = temp.val;
-            temp = temp.next;
-        }
+        // find the middle of the linkedList
+        ListNode slow = head;
+        ListNode fast = head.next;
         
-        
-        temp = head;
-        i =0;
-        while(temp!=null){
-            /* primary check for the current node */
-            if(i<= (length/2-1)){
-                /* find the twin */
-                int twinIndex = length-1-i;
-                int currentTwinSum = arr[twinIndex]+temp.val;
-                result = Math.max(result,currentTwinSum);
-            } else break;
-            i++;
-            temp = temp.next;
+        while(fast != null && fast.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
         }
-        return result;
+        ListNode secondHalf = slow.next;
+        slow.next = null;
+        // reverse the second-half
+        secondHalf = reverseList(secondHalf);
+        
+        // loop over two list and maintain maxSum
+        int resultSum =Integer.MIN_VALUE;
+        while(head != null && secondHalf != null){
+            resultSum = Math.max(resultSum,(head.val+secondHalf.val));
+            head = head.next;
+            secondHalf = secondHalf.next;
+        }
+        return resultSum;
     }
 }
