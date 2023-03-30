@@ -9,33 +9,20 @@
  * }
  */
 class Solution {
-    public static int findNextLargeNode(ListNode node, int val){
-        int nodeVal = 0;
-        while(node != null) {
-            if(node.val > val) {
-                nodeVal = node.val;
-                break;
-            }
-            node = node.next;
-        }
-        return nodeVal;
-    }
-    public static int listLength(ListNode node) {
-        int length = 0;
-        while(node != null) {
-            node = node.next;
-            length++;
-        }
-        return length;
-    }
     public int[] nextLargerNodes(ListNode head) {
-        int[] arr = new int[listLength(head)];
-        int i = 0;
-        while(head != null) {
-            arr[i++] = findNextLargeNode(head, head.val);
+        List<Integer> list = new ArrayList<Integer>();
+        while(head!=null){
+            list.add(head.val);
             head = head.next;
         }
-        return arr;
+        int output[] = new int[list.size()];
+        Stack<Integer> st = new Stack<>();
+        for(int i =0;i<list.size();i++){
+            while(!st.isEmpty() && list.get(st.peek())<list.get(i)){
+                output[st.pop()] = list.get(i);
+            }
+            st.push(i);
+        }
+        return output;
     }
-    
 }
