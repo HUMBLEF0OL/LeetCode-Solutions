@@ -1,0 +1,7 @@
+- handle the base case
+- use fast and slow pointer technique
+- first check for cycle (if slow == fast)
+- if the cycle is detected then
+- run a loop from the starting untill both slow and fast becomes equal
+- finally return slow pointer
+- if cycle is not detected then simply return null
