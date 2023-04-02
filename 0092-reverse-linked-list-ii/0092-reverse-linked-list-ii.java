@@ -38,19 +38,13 @@ class Solution {
         }
         reverseHead = reverseList(reverseHead);
         
-        ListNode temp2 = reverseHead;
-        System.out.print(temp2.val+" "+temp2.next.val);
-        while(temp2 !=null && temp2.next!=null){
-            System.out.print(temp2.val+" ");
-            temp2 =temp2.next;
+        temp = reverseHead;
+        while(temp !=null && temp.next!=null){
+            temp =temp.next;
         }
-        if(prev.val == -1){
-            System.out.print(" inside prev null");
-            head = reverseHead;
-        } else{
-            prev.next = reverseHead;
-        }
-        if(temp2 !=null)temp2.next = rest;
+        if(prev.val == -1)head = reverseHead; 
+        else prev.next = reverseHead;
+        if(temp !=null)temp.next = rest;
         
         return head;
     }
