@@ -8,10 +8,11 @@ class Solution {
                 stk.push(s.charAt(i));
             }
         }
-        String result = "";
-        while(stk.size() > 0){
-            result = stk.pop() + result;
+        StringBuilder answer = new StringBuilder();
+        while (!stk.isEmpty()) {
+            answer.append(stk.pop());
         }
-        return result;
+
+        return answer.reverse().toString();
     }
 }
