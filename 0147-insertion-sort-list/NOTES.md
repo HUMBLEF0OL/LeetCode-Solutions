@@ -1,0 +1,4 @@
+- use recursion to solve this problem
+- if current head <= returnedHead
+- then head.next = returned and return head
+- otherwise find the right spot for head and return the returnedHead
