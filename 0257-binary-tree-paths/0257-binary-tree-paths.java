@@ -13,23 +13,23 @@
  *     }
  * }
  */
-class Solution {    
-    List<String> paths = new ArrayList<>();
-    public void helper(TreeNode root, String currentPath){
+class Solution {
+    List<String> result = new ArrayList<>();
+    public void helper(TreeNode root,String path){
         if(root == null){
             return;
-        }
-        currentPath += String.valueOf(root.val);
-        if(root.left == null && root.right == null){
-            paths.add(currentPath);
+        } else if(root.left == null && root.right == null){
+            result.add(path+String.valueOf(root.val));
             return;
         }
-        currentPath += "->";
-        helper(root.left,currentPath);
-        helper(root.right,currentPath);
+        path += String.valueOf(root.val)+"->";
+        helper(root.left,path);
+        helper(root.right,path);
     }
     public List<String> binaryTreePaths(TreeNode root) {
+        if(root == null)return result;
+        
         helper(root,"");
-        return paths;
+        return result;
     }
 }
