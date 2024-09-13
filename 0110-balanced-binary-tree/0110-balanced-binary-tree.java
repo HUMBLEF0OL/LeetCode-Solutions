@@ -13,19 +13,30 @@
  *     }
  * }
  */
-class Solution {
-    public int findHeight(TreeNode root){
-        if(root == null)return 0;
-        return 1+Math.max(findHeight(root.left),findHeight(root.right));
+class Pair{
+    boolean isBalance;
+    int height;
+    public Pair(boolean isBalance, int height){
+        this.isBalance = isBalance;
+        this.height = height;
     }
+}
+class Solution {
+    
+    public Pair optimized(TreeNode root){
+        if(root == null)return new Pair(true,0);
+        Pair left = optimized(root.left);
+        Pair right = optimized(root.right);
+        
+        int height = Math.max(left.height,right.height)+1;
+        boolean isBalanced = left.isBalance && right.isBalance && Math.abs(left.height - right.height) <= 1;
+        return new Pair(isBalanced,height);
+        
+    }
+    
     public boolean isBalanced(TreeNode root) {
         if(root == null)return true;
-        boolean left = isBalanced(root.left);
-        if(!left)return false;
-        boolean right = isBalanced(root.right);
-        if(!right)return false;
-        int leftSide = findHeight(root.left);
-        int rightSide = findHeight(root.right);
-        return Math.abs(leftSide-rightSide) <= 1;
+        
+        return optimized(root).isBalance;
     }
 }
