@@ -6,16 +6,14 @@ public class Solution extends VersionControl {
         // apply binary search
         int low = 1;
         int high = n;
-        int result=Integer.MAX_VALUE;
         while(low<=high){
             int mid = low+(high-low)/2;
             boolean current = isBadVersion(mid);
             if(!current)low = mid+1;
             else{
                  high = mid-1;
-                 result = mid;
             }
         }
-        return result;
+        return low;
     }
 }
