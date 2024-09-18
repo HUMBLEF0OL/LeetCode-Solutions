@@ -8,24 +8,17 @@ class Solution {
             int j =i+1,k = nums.length-1;
             while (j < k) {
             int sum = nums[i] + nums[j] + nums[k];
-
+            
             if (sum == 0) {
-                // Found a valid triplet
                 list.add(Arrays.asList(nums[i], nums[j], nums[k]));
-
-                // Skip duplicates for the second and third elements
-                while (j < k && nums[j] == nums[j + 1]) j++;
-                while (j < k && nums[k] == nums[k - 1]) k--;
-
-                // Move both pointers after finding a valid triplet
                 j++;
                 k--;
-            } else if (sum < 0) {
-                j++; // We need a larger sum
-            } else {
-                k--; // We need a smaller sum
-            }
-        
+                while (j < k && nums[j] == nums[j - 1]) j++;
+                while (j < k && nums[k] == nums[k + 1]) k--;
+                
+            } 
+            else if (sum < 0) j++;
+            else k--;
         }
         }
         return list;
