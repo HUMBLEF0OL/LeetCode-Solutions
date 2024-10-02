@@ -1,0 +1,9 @@
+- in the quickSort function
+- find the pivotElement then
+- apply the quickSort on the left side of array
+- then on the right side of array
+- int the pivotElement function
+- initially consider the last element as the pivot element and maintain a pIndex (pivot Index)
+- now inside the loop
+- if the current element is smaller then pivot Element then swap the current element with the element present at the pIndex
+- in the end swap the pIndex element with the pivot and return the pIndex
